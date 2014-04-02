@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package domain;
+package gui;
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -18,7 +18,7 @@ import javafx.stage.Stage;
  *
  * @author pieterjan
  */
-public class gui extends Application {
+public class Main extends Application {
     
     @Override
     public void start(Stage primaryStage) {
