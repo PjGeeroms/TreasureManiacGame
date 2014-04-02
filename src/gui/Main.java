@@ -24,8 +24,9 @@ public class Main extends Application {
     
     @Override
     public void start(Stage stage) {
-       GamePanel root = new GamePanel();
-        
+       Stickman player = new Stickman();
+       GamePanel root = new GamePanel(player);
+       
        Scene scene = new Scene(root);
        stage.setScene(scene);
        stage.setTitle("Treasure Maniac");
