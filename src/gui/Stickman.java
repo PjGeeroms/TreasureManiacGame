@@ -6,6 +6,7 @@
 
 package gui;
 
+import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 
 /**
@@ -15,9 +16,7 @@ import javafx.scene.shape.Rectangle;
 public class Stickman extends Rectangle {
     
     public Stickman () {
-        this.setX(50);
-        this.setY(50);
-        this.setWidth(100);
-        this.setHeight(100);
+        setWidth(50);
+        setHeight(50);
     }
 }
