@@ -18,5 +18,6 @@ public class Stickman extends Rectangle {
     public Stickman () {
         setWidth(50);
         setHeight(50);
+        
     }
 }
