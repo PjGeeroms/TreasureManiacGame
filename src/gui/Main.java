@@ -27,9 +27,11 @@ public class Main extends Application {
     
     @Override
     public void start(final Stage stage) {
-       final Stickman player = new Stickman();
-       Game root = new Game(player);
-       root.setFocusTraversable(true); // set focus on game
+       final Hero player = new Hero();
+       Game game = new Game(player);
+       Controls controls = new Controls();
+       Frame root = new Frame(game, controls);
+       
        Scene scene = new Scene(root);
        stage.setScene(scene);
        stage.setTitle("Treasure Maniac");

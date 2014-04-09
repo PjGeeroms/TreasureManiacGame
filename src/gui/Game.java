@@ -6,6 +6,8 @@
 
 package gui;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -16,10 +18,12 @@ import javafx.scene.layout.Pane;
  * @author pieterjan
  */
 public class Game extends Pane {
-    private Stickman player;
+    private Hero player;
     private double x = 0;
+    private int index = 0;
+    final int CONTROLSHEIGHT = 200;
     
-    public Game(Stickman player) {
+    public Game(Hero player) {
         this.requestFocus();
         this.player = player;
         initialize();
@@ -28,6 +32,16 @@ public class Game extends Pane {
     
     private boolean initialize() {
         getChildren().add(player);
+        
+        heightProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> ov, Number oldHeight, Number newHeight) {
+                double heightHero = player.getBoundsInLocal().getMaxY();
+                player.setLayoutY(newHeight.doubleValue() - CONTROLSHEIGHT - heightHero);
+            }
+        });
+        
+        setFocusTraversable(true); // set focus on game
         return true;
     }
     
@@ -36,6 +50,13 @@ public class Game extends Pane {
 
             @Override
             public void handle(KeyEvent t) {
+                index++;
+                if ( (index & 1) == 0 ) {
+                   player.setHeroMove1();
+                } else {
+                    player.setHeroMove2();
+                }
+                
                 if (t.getCode() == KeyCode.RIGHT) {
                     x = x+10;
                     player.setTranslateX(x);
