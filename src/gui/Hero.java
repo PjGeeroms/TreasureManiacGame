@@ -18,6 +18,7 @@ import javafx.scene.shape.Rectangle;
 public class Hero extends ImageView{
     private static Image hero = new Image(Main.class.getResourceAsStream("/images/heroes/Hero.png"));
     private static Image hero2 = new Image(Main.class.getResourceAsStream("/images/heroes/Hero2.png"));
+    private static Image heroIdle = new Image(Main.class.getResourceAsStream("/images/heroes/HeroIdle.png"));
     
     public Hero () {
         createHero();
@@ -31,8 +32,12 @@ public class Hero extends ImageView{
         setImage(hero2);
     }
     
+    protected void setHeroIdle() {
+        setImage(heroIdle);
+    }
+    
     private boolean createHero() {
-        setImage(hero);
+        setHeroIdle();
         return true;
     }
 

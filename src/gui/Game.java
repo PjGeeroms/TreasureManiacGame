@@ -84,7 +84,6 @@ public class Game extends Pane {
 
             @Override
             public void handle(KeyEvent t) {
-                index++;
                 if ( (index & 1) == 0 ) {
                    player.setHeroMove1();
                 } else {
@@ -92,13 +91,19 @@ public class Game extends Pane {
                 }
                 
                 if (t.getCode() == KeyCode.RIGHT) {
+                    index++;
                     x = x+10;
                     player.setTranslateX(x);
                 }
-                
-                if(t.getCode() == KeyCode.LEFT) {
-                    x = x-10;
-                    player.setTranslateX(x);
+            }
+        });
+        
+        setOnKeyReleased(new EventHandler<KeyEvent>() {
+
+            @Override
+            public void handle(KeyEvent t) {
+                if (t.getCode() == KeyCode.RIGHT) {
+                    player.setHeroIdle();
                 }
             }
         });
