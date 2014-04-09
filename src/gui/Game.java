@@ -24,6 +24,10 @@ public class Game extends Pane {
     private int index = 0;
     final int CONTROLSHEIGHT = 150;
     
+    /**
+     * The game 'engine'
+     * @param player the hero to be added in the game
+     */
     public Game(Hero player) {
         this.requestFocus();
         this.player = player;
@@ -31,6 +35,13 @@ public class Game extends Pane {
         movement();
     }
     
+    /**
+     * Settings for the game
+     * Css is imported here
+     * Player gets added here
+     * HeightPropertyListner for dynamic hero placement
+     * @return True if successful, False if failed
+     */
     private boolean initialize() {
         getStylesheets().add("css/gamebackground.css");
         generateBackground();
@@ -79,6 +90,10 @@ public class Game extends Pane {
         this.getStyleClass().add(backgroundType);
     }
     
+    /**
+     * Movement of the hero
+     * Also contains the logic for the animating
+     */
     private void movement() {
         setOnKeyPressed(new EventHandler<KeyEvent>() {
 

@@ -15,6 +15,9 @@ import javafx.scene.layout.Pane;
  */
 public class Controls extends Pane{
     
+    /**
+     * Initializing bottom box of the game, contains the floor as background. 
+     */
     public Controls() {
         setMinHeight(150);
         getStylesheets().add("css/gameplatform.css");   // add stylesheet

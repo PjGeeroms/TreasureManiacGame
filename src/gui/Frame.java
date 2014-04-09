@@ -16,15 +16,21 @@ public class Frame extends BorderPane {
     private Game game;
     private Controls controls;
     
+    /**
+     * Initialize the frame for the game
+     * @param game The game to be added to the Frame
+     * @param controls The controls to be added to the game
+     */
     public Frame(Game game, Controls controls) {
         this.game = game;
         this.controls = controls;
         buildFrame();
     }
     
+    /**
+     * Configuration of the Frame
+     */
     private void buildFrame() {
-        //setMinHeight(400);
-        //setMinWidth(600);
         setCenter(game);
         setBottom(controls);
     }
