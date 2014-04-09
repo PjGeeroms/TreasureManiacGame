@@ -6,6 +6,7 @@
 
 package gui;
 
+import domein.Utility;
 import javafx.scene.layout.Pane;
 
 /**
@@ -15,7 +16,28 @@ import javafx.scene.layout.Pane;
 public class Controls extends Pane{
     
     public Controls() {
-        setMinHeight(200);
-        setStyle("-fx-background-color: red;");
+        setMinHeight(150);
+        getStylesheets().add("css/gameplatform.css");   // add stylesheet
+        generatePlatform();
+    }
+    
+    /**
+     * Dynamic generating FloorTiles
+     */
+    private void generatePlatform() {
+        int platform = Utility.generateRandom(0, 1);
+        String platformType = "";
+        switch (platform) {
+            case 0: 
+                platformType = "wasteland";
+                break;
+            case 1: 
+                platformType = "greenhills";
+                break;
+            default:
+                platformType = "greenhills";
+                break;
+        }
+        this.getStyleClass().add(platformType);
     }
 }

@@ -35,8 +35,10 @@ public class Main extends Application {
        Scene scene = new Scene(root);
        stage.setScene(scene);
        stage.setTitle("Treasure Maniac");
-       stage.setFullScreen(true);
+       stage.setFullScreen(false);
        stage.setResizable(false);
+       stage.setMinWidth(800);
+       stage.setMinHeight(600);
        stage.getIcons().add(logo);
        stage.show();
        

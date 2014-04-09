@@ -23,8 +23,8 @@ public class Frame extends BorderPane {
     }
     
     private void buildFrame() {
-        setMinHeight(400);
-        setMinWidth(600);
+        //setMinHeight(400);
+        //setMinWidth(600);
         setCenter(game);
         setBottom(controls);
     }

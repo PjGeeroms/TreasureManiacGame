@@ -6,6 +6,7 @@
 
 package gui;
 
+import domein.Utility;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
@@ -21,7 +22,7 @@ public class Game extends Pane {
     private Hero player;
     private double x = 0;
     private int index = 0;
-    final int CONTROLSHEIGHT = 200;
+    final int CONTROLSHEIGHT = 150;
     
     public Game(Hero player) {
         this.requestFocus();
@@ -31,8 +32,12 @@ public class Game extends Pane {
     }
     
     private boolean initialize() {
+        getStylesheets().add("css/gamebackground.css");
+        generateBackground();
+        // add player to game
         getChildren().add(player);
         
+        // add listener to height on window for dynamic champion placement
         heightProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> ov, Number oldHeight, Number newHeight) {
@@ -41,8 +46,37 @@ public class Game extends Pane {
             }
         });
         
-        setFocusTraversable(true); // set focus on game
+        /**
+         * set focus on game
+         * True = focus on game, enables the movement with keys
+         * False = focus isn't on game anymore, key listeners will not work
+         */
+        setFocusTraversable(true); 
+        
         return true;
+    }
+    
+    /**
+     * Dynamic generating FloorTiles
+     */
+    private void generateBackground() {
+        int background = Utility.generateRandom(0, 2);
+        String backgroundType = "";
+        switch (background) {
+            case 0: 
+                backgroundType = "ruinedcity";
+                break;
+            case 1: 
+                backgroundType = "sky";
+                break;
+            case 2:
+                backgroundType = "stonewall";
+                break;
+            default:
+                backgroundType = "stonewall";
+                break;
+        }
+        this.getStyleClass().add(backgroundType);
     }
     
     private void movement() {
