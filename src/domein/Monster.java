@@ -1,4 +1,4 @@
-//Iteratie 1
+//Iteratie 2
 package domein;
 
 import exceptions.*;
@@ -18,16 +18,15 @@ public class Monster {
     private int awareness;
     private String name;
     private String avatar;
-    private List<Treasure> treasures;               //NIET voor iteratie 1 (en waarschijnlijk onnodig)
+    private List<Treasure> treasures;             //Niet voor iteratie 2
 
     private final static int MAX = 15;
     private final static int MIN = 0;
     private final static int maxTreasures = 3;
-    private final static int MAX_NAME = 25;
-    private final static int MAX_DESCRIPTION = 50;
+    private final static int MAX_NAME = 15;
 
     /**
-     * Default constructor to create a monster with default values
+     * Default constructor to create a monster with default values.
      */
     public Monster() {
         this(0, "MONSTER", 0, 0, 0, 0, "default.png");
@@ -44,7 +43,7 @@ public class Monster {
      * @param speed the speed of the monster
      * @param awareness the awareness of the monster
      */
-    public Monster(int id, String name, int power, int defense, int speed, int awareness, String avatar) {
+    public Monster(int id, String name, int power, int defense, int speed, int awareness, String avatar) throws EmptyArgumentException, OutOfRangeException, ImageNotSelectedException {
         setId(id);
         setName(name);
         setAvatar(avatar);
@@ -56,6 +55,23 @@ public class Monster {
     }
 
     /**
+     *
+     * Copy-constructor to create a monster with the same values as the given
+     * monster
+     *
+     * @param monster monster whose values will be copied into the new monster
+     */
+    public Monster(Monster monster) {
+        id = monster.id;
+        name = monster.name;
+        avatar = monster.avatar;
+        power = monster.power;
+        defense = monster.defense;
+        speed = monster.speed;
+        awareness = monster.awareness;
+    }
+
+    /**
      * Link a treasure to the monster monster can only defend a maximum 3
      * treasures @link isFull()
      *
@@ -63,7 +79,7 @@ public class Monster {
      * @return true or false depending if the monster can be linked with a
      * treasure
      */
-    public boolean addTreasure(Treasure treasure) {        //NIET voor iteratie 1 (en waarschijnlijk onnodig)     
+    public boolean addTreasure(Treasure treasure) {        //NIET voor iteratie 2 (en waarschijnlijk onnodig)     
         if (!isFull()) {
             treasures.add(treasure);
             return true;
@@ -72,68 +88,70 @@ public class Monster {
     }
 
     /**
-     * checks if monster can defend more treasure
+     * Checks if a monster can defend more treasure
      *
      * @return true or false depending if the monster can defend more treasure
      * or not
      */
-    public boolean isFull() {                               //NIET voor iteratie 1 (en waarschijnlijk onnodig)
+    public boolean isFull() {                               //NIET voor iteratie 2 (en waarschijnlijk onnodig)
         return treasures.size() <= maxTreasures;             //Maximaal 3 schatten in 1 kamer, bij 1 monster
     }
 
     /**
+     * Give the id of the monster
      *
-     * @return
+     * @return the monster's id
      */
     public int getId() {
         return id;
     }
 
     /**
+     * Sets the id of the monster
      *
-     * @param id
+     * @param id new value for the monster's id
      */
     public void setId(int id) {
         this.id = id;
     }
 
     /**
-     * get power of the monster
+     * Give the power of the monster
      *
-     * @return the power of the monster
+     * @return the monster's power
      */
     public int getPower() {
         return power;
     }
 
     /**
-     * set the power of the monster
+     * Set the power of the monster
      *
-     * @param power value to change power
+     * @param power new value for the monster's power
      */
-    public void setPower(int power) {
+    public void setPower(int power) throws OutOfRangeException {
         if (power < MIN || power > MAX) {
             throw new OutOfRangeException();
         } else {
-            this.power = power;                   //Eigenschappen moeten tussen 1 en 100 liggen
+            this.power = power;                   //Eigenschappen moeten tussen (MIN=)1 en (MAX=)100 liggen
         }
     }
 
     /**
-     * get defense of the monster
+     * Give the defense of the monster
      *
-     * @return the defense of the monster
+     * @return the monster's defense
      */
     public int getDefense() {
         return defense;
     }
 
     /**
-     * set the defense of the monster
+     * Set the defense of the monster
      *
-     * @param defense value to change defense
+     * @param defense new value for the monster's defense
      */
-    public void setDefense(int defense) {
+    public void setDefense(int defense) throws OutOfRangeException {
         if (defense < MIN || defense > MAX) {
             throw new OutOfRangeException();
         } else {
@@ -142,20 +160,20 @@ public class Monster {
     }
 
     /**
-     * get speed of the monster
+     * Give the speed of the monster
      *
-     * @return the speed of the monster
+     * @return the monster's speed
      */
     public int getSpeed() {
         return speed;
     }
 
     /**
-     * set the speed of the monster
+     * Sets the speed of the monster
      *
-     * @param speed value to change speed
+     * @param speed new value for the monster's speed
      */
-    public void setSpeed(int speed) {
+    public void setSpeed(int speed) throws OutOfRangeException {
         if (speed < MIN || speed > MAX) {
             throw new OutOfRangeException();
         }
@@ -163,20 +181,20 @@ public class Monster {
     }
 
     /**
-     * get awareness of the monster
+     * Give the awareness of the monster
      *
-     * @return return the awareness of the monster
+     * @return the monster's awareness
      */
     public int getAwareness() {
         return awareness;
     }
 
     /**
-     * set the awareness of the monster
+     * Set the awareness of the monster
      *
-     * @param awareness value to change the awareness
+     * @param awareness new value for the monster's awareness
      */
-    public void setAwareness(int awareness) {
+    public void setAwareness(int awareness) throws OutOfRangeException {
         if (awareness < MIN || awareness > MAX) {
             throw new OutOfRangeException();
         } else {
@@ -185,20 +203,20 @@ public class Monster {
     }
 
     /**
-     * get the name of the monster
+     * Give the name of the monster
      *
-     * @return the name of the monster
+     * @return the monster's name
      */
     public String getName() {
         return name;
     }
 
     /**
-     * set the monster's name
+     * Set the name of the monster
      *
-     * @param name the name of the monster
+     * @param name new value for the monster's name
      */
-    public void setName(String name) {
+    public void setName(String name) throws EmptyArgumentException, OutOfRangeException {
         if (name.equals("")) {
             throw new EmptyArgumentException();
         }
@@ -209,20 +227,20 @@ public class Monster {
     }
 
     /**
-     * get the path of the monster avatar
+     * Give the imagename of the monster avatar
      *
-     * @return path of the monster avatar
+     * @return imagename of the monster's avatar
      */
     public String getAvatar() {
         return avatar;
     }
 
     /**
-     * set the path of the monster avatar
+     * Set the avatar of the monster
      *
-     * @param avatar path of the monster avatar
+     * @param avatar new value for the monster's avatar
      */
-    public void setAvatar(String avatar) {
+    public void setAvatar(String avatar) throws ImageNotSelectedException {
         /*if (avatar.equals("") || avatar.equals(".jpg") || avatar.equals(".png")) {
          throw new EmptyArgumentException();
          }
@@ -245,54 +263,101 @@ public class Monster {
 
     }
 
-    /*Niet voor iteratie 1
-     public int calcTotalAwareness() {
-     int total = awareness + (int) (Math.random() * 6) + 1;
-     return total;
-     }
-     public int calcTotalPower() {
-     int total = power + (int) (Math.random() * 6) + 1;
-     return total;
-     }
-     public int calcTotalDefense() {
-     int total = defense + (int) (Math.random() * 6) + 1;
-     return total;
-     }
-     public int calcTotalSpeed() {
-     int total = speed + (int) (Math.random() * 6) + 1;
-     return total;
-     }
-     */
     /**
+     * Give highest boundary for a monster's stats
      *
-     * @return
+     * @return the maximum for a monster's stats
      */
     public static int getMAX() {
         return MAX;
     }
 
     /**
+     * Give lowest boundary for a monster's stats
      *
-     * @return
+     * @return the minimum for a monster's stats
      */
     public static int getMIN() {
         return MIN;
     }
 
     /**
+     * Give maximum characters for the name
      *
-     * @return
+     * @return maximum number of characters for the monster's name
      */
     public static int getMAX_NAME() {
         return MAX_NAME;
     }
 
     /**
+     * Compare with a monster
      *
-     * @return
+     * @param monster the monster that will be compared with
+     * @return true if monsters are the same, false if not
      */
-    public static int getMAX_DESCRIPTION() {
-        return MAX_DESCRIPTION;
+    public boolean equals(Monster monster) {
+        return power == monster.power && defense == monster.defense
+                && speed == monster.speed && awareness == monster.awareness
+                && avatar.equals(monster.avatar) && name.equals(monster.name);
     }
 
+    /**
+     *
+     * Copies all values from one monster into another one
+     *
+     * @param monster monster whose values will be copied into the original
+     * monster
+     *
+     */
+    public void copyValues(Monster monster) {
+        name = monster.name;
+        avatar = monster.avatar;
+        power = monster.power;
+        defense = monster.defense;
+        speed = monster.speed;
+        awareness = monster.awareness;
+    }
+
+    /**
+     * Give the monsters' information
+     *
+     * @return information-String about the monsters-object
+     */
+    @Override
+    public String toString() {
+        String text;
+        if (id >= 10) {
+            text = "[#" + id + "]\t" + name;
+        } else {
+            text = "[#" + id + "]\t\t" + name;
+        }
+        return text;
+    }
+
+    //Totaal=beginwaarde+randomwaarde tussen 1 en 6
+    public int calcTotalAwareness() {
+        int total = awareness + (int) (Math.random() * 6) + 1;
+        return total;
+    }
+
+    public int calcTotalPower() {
+        int total = power + (int) (Math.random() * 6) + 1;
+        return total;
+    }
+
+    public int calcTotalDefense() {
+        int total = defense + (int) (Math.random() * 6) + 1;
+        return total;
+    }
+
+    public int calcTotalSpeed() {
+        int total = speed + (int) (Math.random() * 6) + 1;
+        return total;
+    }
+    
+    public int getTotal()
+    {
+        return power+defense+speed+awareness;
+    }
 }

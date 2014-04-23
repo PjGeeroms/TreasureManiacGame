@@ -1,4 +1,4 @@
-//NIET voor iteratie 1 (en waarschijnlijk onnodig)
+//NIET voor iteratie 2 (en waarschijnlijk onnodig)
 package domein;
 
 import java.util.ArrayList;
@@ -16,6 +16,7 @@ public class Inventory {
     private int invDefense;
     private int invSpeed;
     private int invAwareness;
+    private int invValue;
 
     /**
      * Creates a new Inventory, containing all the treasures that were collected
@@ -58,6 +59,7 @@ public class Inventory {
         invDefense += treasure.getDefense();
         invSpeed += treasure.getSpeed();
         invAwareness += treasure.getAwareness();
+        invValue+=treasure.getValue();
         treasures.add(treasure);
     }
 
@@ -71,12 +73,13 @@ public class Inventory {
         invDefense -= treasure.getDefense();
         invSpeed -= treasure.getSpeed();
         invAwareness -= treasure.getAwareness();
+        invValue-=treasure.getValue();
         treasures.remove(treasure);
     }
 
     /**
      *
-     * @return
+     * @return power
      */
     public int getInvPower() {
         return invPower;
@@ -84,7 +87,7 @@ public class Inventory {
 
     /**
      *
-     * @return
+     * @return defense
      */
     public int getInvDefense() {
         return invDefense;
@@ -92,7 +95,7 @@ public class Inventory {
 
     /**
      *
-     * @return
+     * @return speed
      */
     public int getInvSpeed() {
         return invSpeed;
@@ -100,9 +103,14 @@ public class Inventory {
 
     /**
      *
-     * @return
+     * @return awareness
      */
     public int getInvAwareness() {
         return invAwareness;
+    }
+    
+    public int getInvValue()
+    {
+        return invValue;
     }
 }

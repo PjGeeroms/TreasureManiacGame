@@ -14,6 +14,7 @@ public class Hero {
     private String name;
     private String avatar;
     private Inventory inventory;
+    private boolean alive;
 
     private final static int MAX = 8;                 //Minimum en maximum-waarden voor de eigenschappen
     private final static int MIN = 0;
@@ -43,6 +44,7 @@ public class Hero {
         setDefense(defense);
         setSpeed(speed);
         setAwareness(awareness);
+        this.alive=true;
         inventory = new Inventory();
     }                                               //Bij het spel zelf ervoor zorgen dat alle nodige waarden zijn ingegeven, meerdere constructors zijn niet nodig
 
@@ -174,7 +176,7 @@ public class Hero {
      *
      * @return
      */
-    public int calcTotalPower() {
+    public int calcTotalPower() {           //Totaal=Beginwaarde+bonuswaarden van items in inventory+random waarde tussen 1 en 6
         int total = power + inventory.getInvPower();
         if (total >= MIN) {
             total += (int) (Math.random() * 6) + 1;
@@ -212,6 +214,16 @@ public class Hero {
         return total;
     }
 
+    public Inventory getInventory() {
+        return inventory;
+    }
+    
+    
+
+    public int getTotal() {
+        return power + defense + speed + awareness;           //Totaal van alle stats
+    }
+
     public static int getMAX() {
         return MAX;
     }
@@ -224,4 +236,33 @@ public class Hero {
         return MAX_NAME;
     }
 
+    public boolean attack(Monster monster) //true if won, false if not
+    {
+        if (calcTotalPower() > monster.calcTotalDefense()) {        //Bij gelijkstand wint de verdediger (of random nemen)
+            return true;
+        }
+        return false;
+    }
+
+    public boolean defend(Monster monster) {
+        if (calcTotalDefense() >= monster.calcTotalPower()) {
+            return true;
+        }
+        alive=false;
+        return false;
+    }
+    
+    public boolean flee(Monster monster)
+    {
+        if(calcTotalSpeed()>monster.calcTotalSpeed())
+        {
+            return true;
+        }
+        return false;
+    }
+    
+    public boolean isDead()
+    {
+        return alive;
+    }
 }
