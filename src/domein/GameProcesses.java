@@ -89,7 +89,7 @@ public class GameProcesses {
         return validMonsters;
     }
 
-    //Deze methode hoort eerder in de gui thuis want is erg afhankelijk van invoer van de gebruiker
+    //Deze methode hoort eerder in de gui thuis want is erg afhankelijk van invoer van de gebruiker (controller gebruiken)
     public void initializeFight(Monster monster) {
         boolean fightOver = false;
         int turn=0;         //1 is hero's turn 2 monster
