@@ -25,3 +25,18 @@ and open the template in the editor.
     -fx-background-repeat: repeat;
     -fx-background-position: top;
 }
+
+.heropanel
+{
+    -fx-border: 1px solid; 
+    -fx-border-color: #000; 
+    -fx-background-color: lightgray; 
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+}
+
+.detailhero
+{
+        -fx-border: 4px solid; 
+    -fx-border-color: #000; 
+    -fx-background-color: lightgray; 
+}

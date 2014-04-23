@@ -17,12 +17,13 @@ public class Hero {
 
     private final static int MAX = 8;                 //Minimum en maximum-waarden voor de eigenschappen
     private final static int MIN = 0;
+    private final static int MAX_NAME = 15;
 
     /**
      * Create a Hero object with standard values
      */
     public Hero() {
-        this("", "", 0, 0, 0, 0);
+        this("Player", "Hero.gif", 0, 0, 0, 0);
     }
 
     /**
@@ -86,7 +87,7 @@ public class Hero {
      *
      * @return the speed of the hero
      */
-    public double getSpeed() {
+    public int getSpeed() {
         return speed;
     }
 
@@ -104,7 +105,7 @@ public class Hero {
      *
      * @return the awareness of the awareness
      */
-    public double getAwareness() {
+    public int getAwareness() {
         return awareness;
     }
 
@@ -210,4 +211,17 @@ public class Hero {
         }
         return total;
     }
+
+    public static int getMAX() {
+        return MAX;
+    }
+
+    public static int getMIN() {
+        return MIN;
+    }
+
+    public static int getMAX_NAME() {
+        return MAX_NAME;
+    }
+
 }
