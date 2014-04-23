@@ -56,10 +56,6 @@ public class MainPanel extends StackPane {
         FlowPane pane=new FlowPane();
         detail.getStyleClass().add("detailhero");
         detail.getStylesheets().add("css/gamebackground.css");
-        detail.setMinHeight(80);
-        detail.setMaxHeight(80);
-        detail.setMaxWidth(160);
-        detail.setMinWidth(160);
         pane.getChildren().addAll(detail);
         getChildren().addAll(pane);
     }

@@ -22,7 +22,7 @@ import javafx.scene.text.FontWeight;
 public class DetailHero extends GridPane {
 
     private DomeinController controller;
-    private ImageView ivPower, ivDefense, ivSpeed, ivAwareness;
+    private ImageView ivAvatar, ivPower, ivDefense, ivSpeed, ivAwareness;
 
     protected Label lblDetailName, lblDetailPower, lblDetailDefense, lblDetailSpeed, lblDetailAwareness;
     private static Image iPower = new Image(Main.class.getResourceAsStream("/images/icons/Sword.png"));
@@ -39,12 +39,20 @@ public class DetailHero extends GridPane {
         buildPanel();
     }
 
-    public DetailHero(Hero hero)
-    {
+    public DetailHero(Hero hero) {
         buildPanel(hero);
     }
-    
-        private void buildPanel(Hero hero) {
+
+    private void buildPanel(Hero hero) {
+        setMinHeight(120);
+        setMaxHeight(120);
+        setMaxWidth(250);
+        setMinWidth(250);
+        
+        Image img=new Image(Main.class.getResourceAsStream("/images/heroes/" + hero.getAvatar()));
+        ivAvatar = new ImageView(img);
+        ivAvatar.setFitHeight(80);
+        
         ivPower = new ImageView(iPower);
         ivPower.setFitHeight(24);
         ivPower.setFitWidth(24);
@@ -80,14 +88,15 @@ public class DetailHero extends GridPane {
         HBox padding1 = new HBox();
         padding1.setMinWidth(20);
 
-        add(lblDetailName, 0, 0, 3, 1);
-        add(lblDetailPower, 0, 1);
-        add(lblDetailDefense, 0, 2);
-        add(padding1, 1, 1, 1, 2);
-        add(lblDetailSpeed, 2, 1);
-        add(lblDetailAwareness, 2, 2);
+        add(ivAvatar, 0, 0, 1, 2);
+        add(lblDetailName, 1, 0, 3, 1);
+        add(lblDetailPower, 1, 1);
+        add(lblDetailDefense, 1, 2);
+        add(padding1, 2, 1, 1, 2);
+        add(lblDetailSpeed, 3, 1);
+        add(lblDetailAwareness, 3, 2);
     }
-        
+
     /**
      * Build the standard panel
      */

@@ -57,17 +57,34 @@ public class HeroPanel extends GridPane {
     private final int maxCount = 8;
 
     private ImageView ivAvatar, ivPower, ivDefense, ivSpeed, ivAwareness;
-    private static Image iDefaultAvatar = new Image(Main.class.getResourceAsStream("/images/heroes/Hero.gif"));
+    private static Image iDefaultAvatar = new Image(Main.class.getResourceAsStream("/images/heroes/Warrior.gif"));
     private static Image iPower = new Image(Main.class.getResourceAsStream("/images/icons/Sword.png"));
     private static Image iDefense = new Image(Main.class.getResourceAsStream("/images/icons/Shield.png"));
     private static Image iSpeed = new Image(Main.class.getResourceAsStream("/images/icons/Speed.png"));
     private static Image iAwareness = new Image(Main.class.getResourceAsStream("/images/icons/Awareness.png"));
+    private ChoiceBox cbAvatars;
+    private final static File folder = new File("./src/images/heroes/");
+    private static File[] listOfFiles = folder.listFiles();
 
     private TextField txfName;
     private NumberField nfPower, nfDefense, nfSpeed, nfAwareness;
     private Label lblId, lblName, lblPower, lblDefense, lblSpeed, lblAwareness, lblAvatar;
     private Button createBtn;
     private MainPanel owner;
+
+    private ChoiceBox fillAvatarChoiceBox() {
+        ChoiceBox avatars = new ChoiceBox();
+        String name;
+
+        for (File avatar : listOfFiles) {
+            if (avatar.isFile()) {
+                name = avatar.getName();
+                avatars.getItems().add(name.substring(0, (int) (name.length() - 4)));
+//De extensie van de afbeelding moet niet zichtbaar zijn voor de speler
+            }
+        }
+        return avatars;
+    }
 
     public HeroPanel(DetailHero detail, MainPanel owner) {
         this.detail = detail;
@@ -92,6 +109,7 @@ public class HeroPanel extends GridPane {
         lblDefense = new Label("Defense");
         lblSpeed = new Label("Speed");
         lblAwareness = new Label("Awareness");
+        lblAvatar = new Label("Avatar");
 
         txfName = new TextField(hero.getName());  //Zal defaultnaam Player zijn
         txfName.setPromptText(hero.getName());
@@ -112,6 +130,8 @@ public class HeroPanel extends GridPane {
         ivAvatar.setFitHeight(80);
         ivAvatar.setFitWidth(80);
 
+        cbAvatars = fillAvatarChoiceBox();
+
         add(ivAvatar, 0, 0, 1, 2);
         add(detail, 1, 0, 1, 2);
 
@@ -130,9 +150,11 @@ public class HeroPanel extends GridPane {
         add(lblAwareness, 0, 7);
         add(nfAwareness, 1, 7);
 
-        add(message, 0, 8, 2, 1);
+        add(lblAvatar, 0, 8);
+        add(cbAvatars, 1, 8, 2, 1);
+        add(message, 0, 9, 2, 1);
 
-        add(createBtn, 0, 10, 2, 1);
+        add(createBtn, 0, 12, 2, 1);
         setHalignment(createBtn, HPos.CENTER);
 
         count = 0;            //Aantal stats toegewezen
@@ -144,10 +166,11 @@ public class HeroPanel extends GridPane {
                 if (newValue.length() >= Hero.getMAX_NAME()) {
                     txfName.setText(oldValue);
                 }
-                if(newValue.length()==0)
+                if (newValue.length() == 0) {
                     detail.setName(hero.getName());
-                else
+                } else {
                     detail.setName(txfName.getText());
+                }
             }
         });
         //Eventueel in ControlPanel ook maximuminvoer voorzien
@@ -299,6 +322,19 @@ public class HeroPanel extends GridPane {
             }
         });
 
+        cbAvatars.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> ov, String oldVal, String newVal) {
+                if (newVal != null) {
+                    Image newImg = new Image(Main.class.getResourceAsStream("/images/heroes/" + newVal + ".gif"));
+                    //Alle heroes zullen gifs zijn
+                    ivAvatar.setImage(newImg);
+                    hero.setAvatar(newVal + ".gif");
+                }
+            }
+        }
+        );
+
         createBtn.setOnAction(
                 new EventHandler<ActionEvent>() {
                     @Override
@@ -325,6 +361,7 @@ public class HeroPanel extends GridPane {
                 }
         );
 
+        cbAvatars.getSelectionModel().selectFirst();            //Uitvoeren na de listener te adden zodat avatar automatisch wordt geïnitialiseerd
         txfName.requestFocus();         //request focus nog niet correct
         txfName.selectAll();
     }
