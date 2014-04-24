@@ -27,7 +27,7 @@ public class Main extends Application {
     
     @Override
     public void start(final Stage stage) {
-       final Hero player = new Hero();
+       final HeroView player = new HeroView();
        Game game = new Game(player);
        Controls controls = new Controls();
        Frame root = new Frame(game, controls);
